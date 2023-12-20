@@ -25,8 +25,13 @@ function capitalize(string) {
 
 function playRound(playerChoice, computerChoice) {
     while (playerChoice === computerChoice) {
+        console.log("Tie, replay.")
+        
         playerChoice = getPlayerChoice();
         computerChoice = getComputerChoice();
+
+        console.log(`Human: ${playerChoice}`);
+        console.log(`Computer: ${computerChoice}`);
     }
 
     let result;
@@ -56,4 +61,32 @@ function playRound(playerChoice, computerChoice) {
         }
     }
     return result;
+}
+
+function game() {
+    let computerScore = 0, humanScore = 0;
+    for (let i = 0; i < 5; i++) {
+        const playerChoice = getPlayerChoice();
+        const computerChoice = getComputerChoice();
+        console.log(`Human: ${playerChoice}`);
+        console.log(`Computer: ${computerChoice}`);
+
+        const result = playRound(playerChoice, computerChoice);
+        console.log(`result: ${result.slice(4, result.indexOf('!'))}`);
+        
+
+        if (result === undefined) {computerScore++}
+        else if (result.slice(4, result.indexOf('!')) === "win") {
+            humanScore++;
+        } 
+        else {
+            computerScore++;
+        }
+    }
+    if (humanScore > computerScore) {
+        console.log(`Human: ${humanScore}, Computer: ${computerScore}. You Won!`);
+    }
+    else {
+        console.log(`Human: ${humanScore}, Computer: ${computerScore}. You Lose!`);
+    }
 }
