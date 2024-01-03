@@ -9,7 +9,9 @@ function getPlayerChoice() {
     let input;
     while (isRunning) {
         input = capitalize(prompt("Rock, Paper, Scissors? "));
-        if (input === "Rock" || input === "Paper" || input === "Scissors" || input == null) {
+        if (input === "Rock" || input === "Paper" ||
+            input === "Scissors" || input == null) {
+            
             isRunning = false;
         }
     }
@@ -63,6 +65,7 @@ function playRound(playerChoice, computerChoice) {
     return result;
 }
 
+/*
 function game() {
     let computerScore = 0, humanScore = 0;
     for (let i = 0; i < 5; i++) {
@@ -90,3 +93,15 @@ function game() {
         console.log(`Human: ${humanScore}, Computer: ${computerScore}. You Lose!`);
     }
 }
+*/
+
+const choiceButtons = document.querySelector(".choices");
+console.log(choiceButtons);
+choiceButtons.addEventListener("click", (e) => {
+    
+    // Valid only when user click on button
+    if (e.target.tagName === "BUTTON") {
+        const playerChoice = document.querySelector("#player-choice");
+        playerChoice.textContent = e.target.textContent;
+    }
+});  
