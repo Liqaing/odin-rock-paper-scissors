@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.player-section, .scoreboard, .computer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ 
+#player-choice, #score, #computer-choice {
+    height: 150px;
+}
