@@ -9,6 +9,7 @@
 }
 
 .player-section, .scoreboard, .computer-section {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,4 +18,15 @@
  
 #player-choice, #score, #computer-choice {
     height: 150px;
+}
+
+#score {
+    display: flex;
+    gap: 20px;
+}
+
+#score div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
