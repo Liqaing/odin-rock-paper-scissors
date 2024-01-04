@@ -25,44 +25,63 @@ function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
-function playRound(playerChoice, computerChoice) {
-    while (playerChoice === computerChoice) {
-        console.log("Tie, replay.")
-        
-        playerChoice = getPlayerChoice();
-        computerChoice = getComputerChoice();
-
-        console.log(`Human: ${playerChoice}`);
-        console.log(`Computer: ${computerChoice}`);
+function checkWinner(playerScore, computerScore) {
+    let winner = document.querySelector("#game-winner");
+    
+    if (playerScore === "5") {
+        winner.textContent = "Player Won!";
     }
+    else if (computerScore === "5") {
+        winner.textContent = "Computer Won!";
+    }
+}
 
-    let result;
+function playRound(playerChoice, computerChoice) {
+
+    const playerScore = document.querySelector("#player-score");
+    const computerScore = document.querySelector("#computer-score");
+
+    const roundWinner = document.querySelector("#round-winner");
+
+    if (playerChoice === computerChoice) {
+        roundWinner.textContent = "Tie";
+        return;
+    }
+     
     if (playerChoice === "Rock") {
         if (computerChoice === "Paper") {
-            result = `You lose! ${computerChoice} beats ${playerChoice}`;
+            computerScore.textContent = Number(computerScore.textContent) + 1;
+            roundWinner.textContent = `You lose! ${computerChoice} beats ${playerChoice}`;
         }
         else if (computerChoice === "Scissors") {
-            result = `You win! ${playerChoice} beats ${computerChoice}`;
+            playerScore.textContent = Number(playerScore.textContent) + 1;
+            roundWinner.textContent = `You win! ${playerChoice} beats ${computerChoice}`;
         }
     }
     else if (playerChoice === "Paper") {
         if (computerChoice === "Scissors") {
-            result = `You lose! ${computerChoice} beats ${playerChoice}`;
+            computerScore.textContent = Number(computerScore.textContent) + 1;
+            roundWinner.textContent = `You lose! ${computerChoice} beats ${playerChoice}`;
         }
         else if (computerChoice === "Rock") {
-            result = `You win! ${playerChoice} beats ${computerChoice}`;
+            playerScore.textContent = Number(playerScore.textContent) + 1;
+            roundWinner.textContent = `You win! ${playerChoice} beats ${computerChoice}`;
         }
     } 
     // When player choice is scissors
     else if (playerChoice === "Scissors") {
         if (computerChoice === "Rock") {
-            result = `You lose! ${computerChoice} beats ${playerChoice}`;
+            computerScore.textContent = Number(computerScore.textContent) + 1;
+            roundWinner.textContent = `You lose! ${computerChoice} beats ${playerChoice}`;
         }
         else if (computerChoice === "Paper") {
-            result = `You win! ${playerChoice} beats ${computerChoice}`;
+            playerScore.textContent = Number(playerScore.textContent) + 1;
+            roundWinner.textContent = `You win! ${playerChoice} beats ${computerChoice}`;
         }
     }
-    return result;
+
+    checkWinner(playerScore.textContent, computerScore.textContent);
+
 }
 
 /*
@@ -108,6 +127,6 @@ choiceButtons.addEventListener("click", (e) => {
         const computerChoice = getComputerChoice();
         document.querySelector("#computer-choice").textContent = computerChoice;
 
-        
+        playRound(playerChoice, computerChoice);
     }
 });  
