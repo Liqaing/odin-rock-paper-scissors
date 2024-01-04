@@ -101,7 +101,13 @@ choiceButtons.addEventListener("click", (e) => {
     
     // Valid only when user click on button
     if (e.target.tagName === "BUTTON") {
-        const playerChoice = document.querySelector("#player-choice");
-        playerChoice.textContent = e.target.textContent;
+
+        const playerChoice = e.target.textContent;
+        document.querySelector("#player-choice").textContent = playerChoice;
+        
+        const computerChoice = getComputerChoice();
+        document.querySelector("#computer-choice").textContent = computerChoice;
+
+        
     }
 });  
