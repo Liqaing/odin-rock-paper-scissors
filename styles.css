@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: 0;
 }
 
 #container {
@@ -16,7 +17,9 @@
 }
 
  
-#player-choice, #score, #computer-choice {
+#player-choice, #computer-choice {
+    display: flex;
+    align-items: center;
     height: 150px;
 }
 
