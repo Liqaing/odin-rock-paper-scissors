@@ -25,14 +25,66 @@ function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
-function checkWinner(playerScore, computerScore) {
-    let winner = document.querySelector("#game-winner");
+function restartGame() {
+    // Clear score
+    document.querySelector("#player-score").textContent = "";
+    document.querySelector("#computer-score").textContent = "";
+    document.querySelector("#round-winner").textContent = "";
+
+    // Clear all element in winner display
+    const winnerDisplay = document.querySelector("#game-winner");
+    winnerDisplay.innerHTML = "";
+    winnerDisplay.classList.remove("pop-up");
+
+    // Enable button for new game
+    const rpsButtons = document.querySelectorAll(".choices button");
+    console.log(rpsButtons);
+    rpsButtons.forEach(btn => {
+        btn.disabled = false;
+        console.log(btn);
+    });
     
+}
+
+function gameDone(msg, playerScore, computerScore) {
+
+    // Disable all button
+    const rpsButtons = document.querySelectorAll(".choices button");
+    console.log(rpsButtons);
+    rpsButtons.forEach(btn => {
+        btn.disabled = true;
+        console.log(btn);
+    });
+
+    const winnerDisplay = document.querySelector("#game-winner");
+
+    // Show winner of the game
+    const winnerMsg = document.createElement("p");
+    winnerMsg.textContent = msg;
+    winnerDisplay.appendChild(winnerMsg);
+
+    const score = document.createElement("p");
+    score.textContent = `Player: ${playerScore} vs Computer ${computerScore}`;
+    winnerDisplay.appendChild(score)
+
+    // Restart game to play again
+    const restartGameBtn = document.createElement("button");
+    restartGameBtn.textContent = "Restart Game";
+    restartGameBtn.classList.add("restart-game");
+    restartGameBtn.addEventListener("click", restartGame)
+    winnerDisplay.appendChild(restartGameBtn);
+
+    winnerDisplay.classList.add("pop-up");
+}
+
+function checkWinner(playerScore, computerScore) {
     if (playerScore === "5") {
-        winner.textContent = "Player Won!";
+        // winner.textContent = "Player Won!";
+        gameDone("You Won!", playerScore, computerScore);
     }
     else if (computerScore === "5") {
-        winner.textContent = "Computer Won!";
+        // winner.textContent = "Computer Won!";
+        gameDone("You Lose!", playerScore, computerScore);
     }
 }
 
@@ -83,36 +135,6 @@ function playRound(playerChoice, computerChoice) {
     checkWinner(playerScore.textContent, computerScore.textContent);
 
 }
-
-/*
-function game() {
-    let computerScore = 0, humanScore = 0;
-    for (let i = 0; i < 5; i++) {
-        const playerChoice = getPlayerChoice();
-        const computerChoice = getComputerChoice();
-        console.log(`Human: ${playerChoice}`);
-        console.log(`Computer: ${computerChoice}`);
-
-        const result = playRound(playerChoice, computerChoice);
-        console.log(`result: ${result.slice(4, result.indexOf('!'))}`);
-        
-
-        if (result === undefined) {computerScore++}
-        else if (result.slice(4, result.indexOf('!')) === "win") {
-            humanScore++;
-        } 
-        else {
-            computerScore++;
-        }
-    }
-    if (humanScore > computerScore) {
-        console.log(`Human: ${humanScore}, Computer: ${computerScore}. You Won!`);
-    }
-    else {
-        console.log(`Human: ${humanScore}, Computer: ${computerScore}. You Lose!`);
-    }
-}
-*/
 
 const choiceButtons = document.querySelector(".choices");
 console.log(choiceButtons);
